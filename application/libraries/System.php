@@ -88,13 +88,13 @@ class System
 
 		if ($admin == true)
 		{
-			$this->CI->load->view('admin/layout/container', $data);
+			$this->CI->load->view('templates/admin/', $data);
 		}
 		else
 		{
 			$template = $this->get_default_template();
 
-			$this->CI->load->view('templates/' . $template . '/layout/container', $data);
+			$this->CI->load->view('templates/' . $template . '/static/template', $data);
 		}
 	}
 
@@ -102,7 +102,7 @@ class System
 	{
 		$template = $this->get_default_template();
 
-		$this->CI->load->view('templates/' . $template . '/layout/pages/' . $page, $data);
+		$this->CI->load->view('templates/' . $template . '/pages/' . $page, $data);
 	}
 }
 

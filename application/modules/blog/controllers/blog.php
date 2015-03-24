@@ -52,7 +52,7 @@ class Blog extends MX_Controller
 				$data['posts'][$key]['display_name'] = $this->users->get_user_display_name($post['author']);
 			}
 
-			$this->_template['page']	= 'blog/posts';
+			$this->_template['page']	= 'blog/blog_list';
 		}
 		else
 		{

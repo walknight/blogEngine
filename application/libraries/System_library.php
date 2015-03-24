@@ -38,6 +38,8 @@ class System_library
 			$row = $query->row_array();
 		}
 
+        $this->CI->config->set_item('template','templates/'.$row['path']);
+
 		return $row['path'];
 	}
 
@@ -52,6 +54,7 @@ class System_library
 		{
 			$row = $query->row_array();
 		}
+
 
 		return $row['language'];
 	}
@@ -144,7 +147,7 @@ class System_library
 		{
 			if ($admin == TRUE)
 			{
-				$this->CI->load->view('admin/layout/container', $data);
+				$this->CI->load->view('templates/admin/container', $data);
 			}
 			else if ($this->CI->agent->is_mobile())
 			{
@@ -164,19 +167,19 @@ class System_library
 			else
 			{
 				$template = $this->get_default_template();
-				$this->CI->load->view('templates/' . $template . '/layout/container', $data);
+				$this->CI->load->view('templates/' . $template . '/static/template', $data);
 			}
 		}
 		else
 		{
 			if ($admin == TRUE)
 			{
-				$this->CI->load->view('admin/layout/container', $data);
+				$this->CI->load->view('templates/admin/container', $data);
 			}
 			else
 			{
 				$template = $this->get_default_template();
-				$this->CI->load->view('templates/' . $template . '/layout/container', $data);
+				$this->CI->load->view('templates/' . $template . '/static/template', $data);
 			}
 		}
 	}

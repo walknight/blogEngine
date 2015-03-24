@@ -17,10 +17,18 @@ class Navigation_library
 	}
 
 	// Public methods
-	public function get_navigation()
-	{
-		$this->CI->db->select('title, description, url, external, position');
-		$this->CI->db->order_by('position', 'ASC');
+    public function get_nav($parent_id="",$type="main_menu")
+    {
+        $this->CI->db->select('id,parent_id,title, url, menu_order');
+
+        if($parent_id != "")
+        {
+            $this->CI->db->where('parent_id',$parent_id);
+        } else {
+            $this->CI->db->where('parent_id',0);
+        }
+        $this->CI->db->where('menu_type',$type);
+		$this->CI->db->order_by('menu_order', 'ASC');
 
 		$query = $this->CI->db->get($this->_table['navigation']);
 
@@ -28,7 +36,7 @@ class Navigation_library
 		{
 			return $query->result_array();
 		}
-	}
+    }
 }
 
 /* End of file Navigation_library.php */
