@@ -1,4 +1,5 @@
-code-stuff
+Blog Engine
 ==========
 
-this is all my code repository
+Blog Engine adalah aplikasi berbasis PHP dan Framework Codeigniter untuk membuat sebuah blog yang simple.
+
