@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:85/open-blog2/';
+$config['base_url']	= 'http://'.$_SERVER['HTTP_HOST'].'/blogEngine/';
 
 /*
 |--------------------------------------------------------------------------
