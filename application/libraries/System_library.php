@@ -190,6 +190,42 @@ class System_library
 
 		$this->CI->load->view('templates/' . $template . '/layout/pages/' . $page, $data);
 	}
+
+    public function check_for_upgrade()
+	{
+		$this->config->load('open_blog');
+
+		$current_version = $this->config->item('version');
+		$latest_version = @file_get_contents($this->config->item('version_check_url'));
+
+		if ($latest_version == "")
+		{
+			return 1;
+		}
+		else
+		{
+			$latest_version = explode('|', $latest_version);
+			$latest_version['version'] = $latest_version[0];
+			$latest_version['state'] = $latest_version[1];
+
+			if ($current_version >= $latest_version['version'])
+			{
+				return 2;
+			}
+			else
+			{
+				if ($latest_version['state'] == 'important')
+				{
+					return 3;
+				}
+				else
+				{
+					return 4;
+				}
+			}
+		}
+	}
+
 }
 
 /* End of file System.php */
