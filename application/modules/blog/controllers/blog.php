@@ -1,4 +1,5 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 class Blog extends MX_Controller
 {
 	protected $_template;
@@ -56,7 +57,7 @@ class Blog extends MX_Controller
 		}
 		else
 		{
-			$this->_template['page']	= 'errors/no_posts';
+            $this->_template['page']	= 'errors/no_posts';
 		}
 
 		$this->system_library->load($this->_template['page'], $data);
