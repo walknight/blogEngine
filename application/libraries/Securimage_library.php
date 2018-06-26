@@ -79,7 +79,7 @@ define('SI_IMAGE_GIF',  3);
  * @subpackage classes
  *
  */
-class CI_Securimage_library {
+class Securimage_library {
 
   /**
    * The desired width of the CAPTCHA image.

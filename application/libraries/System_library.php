@@ -61,25 +61,26 @@ class System_library
 
 	public function get_site_info()
 	{
-		$this->CI->db->select('name, value');
+		$this->CI->db->select('blog_title, blog_description, meta_keywords, allow_registrations, enable_rss, enable_atom, links_per_box, months_per_archive, recognize_user_agent');
+		$this->CI->db->where('id', '1');
 
 		$query = $this->CI->db->get($this->_table['settings']);
 
 		if ($query->num_rows() > 0)
 		{
-			$result = $query->result_array();
-
-			foreach ($result as $row)
+			$result = $query->row_array();
+			
+			foreach ($result as $key => $value)
 			{
-				$this->settings[$row['name']] = $row['value'];
+				$this->settings[$key] = $value;
 			}
 		}
 	}
 
 	public function check_site_status()
 	{
-		$this->CI->db->select('name, value');
-		$this->CI->db->where('name', 'enabled');
+		$this->CI->db->select('enabled, offline_reason');
+		$this->CI->db->where('id', '1');
 
 		$query = $this->CI->db->get($this->_table['settings'], 1);
 
@@ -142,8 +143,8 @@ class System_library
 	public function load($page, $data = NULL, $admin = FALSE)
 	{
 		$data['page'] = $page;
-
-		if ($this->settings['recognize_user_agent'] == 1)
+		
+		if ($this->settings['recognize_user_agent'] == 'Y')
 		{
 			if ($admin == TRUE)
 			{
@@ -193,7 +194,7 @@ class System_library
 
     public function check_for_upgrade()
 	{
-		$this->config->load('open_blog');
+		$this->config->load('blog_config');
 
 		$current_version = $this->config->item('version');
 		$latest_version = @file_get_contents($this->config->item('version_check_url'));

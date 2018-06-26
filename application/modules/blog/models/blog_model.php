@@ -19,8 +19,7 @@ class Blog_model extends CI_Model
 	// Public methods
 	public function get_posts_per_page()
 	{
-		$this->db->select('value');
-		$this->db->where('name', 'posts_per_page');
+		$this->db->select('posts_per_site');
 
 		$query = $this->db->get($this->_table['settings'], 1);
 
@@ -29,7 +28,7 @@ class Blog_model extends CI_Model
 			$row = $query->row_array();
 		}
 
-		return $row['value'];
+		return $row['posts_per_site'];
 	}
 
 	public function get_posts_count()
@@ -66,11 +65,11 @@ class Blog_model extends CI_Model
 	{
 		$current_date = date('Y-m-d');
 
-		$this->db->select('posts.id, posts.author, posts.date_posted, posts.title, posts.url_title, posts.excerpt, posts.content, posts.allow_comments, posts.sticky, posts.status, posts.author, users.display_name');
+		$this->db->select('posts.id, posts.author, posts.published_date, posts.title, posts.url_title, posts.excerpt, posts.content, posts.allow_comments, posts.sticky, posts.status, posts.author, users.username');
 		$this->db->from($this->_table['posts'] . ' posts');
 		$this->db->join($this->_table['users'] . ' users', 'posts.author = users.id');
 		$this->db->where('posts.status', 'published');
-		$this->db->where('posts.date_posted <=', $current_date);
+		$this->db->where('posts.published_date <=', $current_date);
 		$this->db->order_by('sticky', 'DESC');
 		$this->db->order_by('id', 'DESC');
 		$this->db->limit($number, $offset);

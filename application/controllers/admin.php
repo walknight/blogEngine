@@ -17,7 +17,7 @@ class Admin extends CI_Controller
     public function index()
     {
 
-        $this->config->load('open_blog');
+        $this->config->load('blog_config');
 
 		$data['website_url']		= $this->config->item('website_url');
 		$data['new_version'] 		= $this->system_library->check_for_upgrade();

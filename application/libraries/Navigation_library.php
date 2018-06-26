@@ -19,7 +19,7 @@ class Navigation_library
 	// Public methods
     public function get_nav($parent_id="",$type="main_menu")
     {
-        $this->CI->db->select('id,parent_id,title, url, menu_order');
+        $this->CI->db->select('id,parent_id,title, url, position');
 
         if($parent_id != "")
         {
@@ -28,7 +28,7 @@ class Navigation_library
             $this->CI->db->where('parent_id',0);
         }
         $this->CI->db->where('menu_type',$type);
-		$this->CI->db->order_by('menu_order', 'ASC');
+		$this->CI->db->order_by('position', 'ASC');
 
 		$query = $this->CI->db->get($this->_table['navigation']);
 
